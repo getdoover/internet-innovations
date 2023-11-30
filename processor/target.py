@@ -23,6 +23,8 @@ except: pass
 # sys.path.append(os.path.dirname(__file__))
 import pydoover as pd
 
+config_id = 'DM_SERIAL'
+msg_id_key = 'SerNo'
 
 class target:
 
@@ -71,19 +73,19 @@ class target:
         if not 'payload' in msg_obj:
             self.add_to_log( "No payload passed - skipping processing" )
             return
-        if not 'SerNo' in msg_obj['payload']:
+        if not msg_id_key in msg_obj['payload']:
             self.add_to_log( "No serial number passed - skipping processing" )
             return
         
-        serial_num = msg_obj['payload']['SerNo']
+        serial_num = msg_obj['payload'][msg_id_key]
 
         agents = self.cli.get_agents()
         self.add_to_log(str(len(agents)) + " accessible agents to process")
 
         for ak, a in agents.items():
             deployment_config = a.get_deployment_config()
-            if deployment_config is not None and 'DM_SERIAL' in deployment_config:
-                if serial_num == deployment_config['DM_SERIAL']:
+            if deployment_config is not None and config_id in deployment_config:
+                if serial_num == deployment_config[config_id]:
                     agent_key = a.get_agent_id()
                     self.add_to_log('Found agent ' + str(agent_key) + " with matching serial number " + str(serial_num))
 
