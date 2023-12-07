@@ -115,11 +115,11 @@ class target:
                         "name" : "location",
                         "displayString" : "Location",
                     },
-                    "speed" : {
+                    "sensorReading" : {
                         "type" : "uiVariable",
                         "varType" : "float",
-                        "name" : "speed",
-                        "displayString" : "Speed (km/h)",
+                        "name" : "sensorReading",
+                        "displayString" : "Sensor Reading",
                         "decPrecision": 1,
                         "form": "radialGauge",
                         "ranges": [
