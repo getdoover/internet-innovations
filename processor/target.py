@@ -542,7 +542,7 @@ class target:
                 data = f['AnalogueData']
 
                 if 'battv' in data:
-                    batt_voltage = (int(data['battv']) / 1600) / 4.2
+                    batt_voltage = (float(data['battv']) / 1600) / 4.2
                     if batt_voltage > 1:
                         batt_voltage = 1
                     if batt_voltage < 0:
@@ -550,13 +550,13 @@ class target:
                     batt_voltage = batt_voltage * 100
 
                 if 'solarv' in data:
-                    solar_voltage = int(data['solarv']) * 27 / 1000
+                    solar_voltage = float(data['solarv']) * 27 / 1000
 
                 if 'reading' in data:
-                    sensor_reading = int(data['reading'])
+                    sensor_reading = float(data['reading'])
 
                 if 'rssi' in data:
-                    rssi = int(data['rssi'])
+                    rssi = float(data['rssi'])
                 
                 if 'gateway' in data:
                     gateway = data['gateway']
