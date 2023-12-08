@@ -143,7 +143,7 @@ class target:
                         "type" : "uiVariable",
                         "varType" : "float",
                         "name" : "batteryVoltage",
-                        "displayString" : "Device Battery Voltage (V)",
+                        "displayString" : "Battery Voltage (V)",
                         "decPrecision": 1,
                         "ranges": [
                             {
@@ -180,7 +180,7 @@ class target:
                         "type" : "uiVariable",
                         "varType" : "float",
                         "name" : "solarVoltage",
-                        "displayString" : "Device Solar Voltage (V)",
+                        "displayString" : "Solar Voltage (V)",
                         "decPrecision": 1,
                         "ranges": [
                             {
@@ -239,7 +239,7 @@ class target:
                             "sensor_settings_submodule": {
                                 "type": "uiSubmodule",
                                 "name": "sensor_settings_submodule",
-                                "displayString": "Temperature Dial Ranges",
+                                "displayString": "Temperature Dial Settings",
                                 "children": {
                                     "sensor_ranges": {
                                         "type": "uiSubmodule",
@@ -253,13 +253,8 @@ class target:
                                             },
                                             "maxMidLevel": {
                                                 "type": "uiFloatParam",
-                                                "name": "maxLevel",
+                                                "name": "maxMidLevel",
                                                 "displayString": "Max-Mid Level (C)",
-                                            },
-                                            "midMinLevel": {
-                                                "type": "uiFloatParam",
-                                                "name": "midMinLevel",
-                                                "displayString": "Mid-Min Level (C)",
                                             },
                                             "midMinLevel": {
                                                 "type": "uiFloatParam",
@@ -272,91 +267,91 @@ class target:
                                                 "displayString": "Min Level (C)",
                                             },
                                         },
-                                        "sensor_range_colours": {
-                                            "type": "uiSubmodule",
-                                            "name": "sensor_ranges",
-                                            "displayString": "Sensor Range Colours",
-                                            "children": {
-                                                "minColourState":{
-                                                    "type": "uiStateCommand",
-                                                    "name": "minColourState",
-                                                    "displayString": "Min",
-                                                    "userOptions": {
-                                                        "green": {
-                                                            "type": "uiElement",
-                                                            "name": "green",
-                                                            "displayString": "Green"
-                                                        },
-                                                        "yellow": {
-                                                            "type": "uiElement",
-                                                            "name": "yellow",
-                                                            "displayString": "Yellow"
-                                                        },
-                                                        "red": {
-                                                            "type": "uiElement",
-                                                            "name": "red",
-                                                            "displayString": "Red"
-                                                        },
-                                                        "blue": {
-                                                            "type": "uiElement",
-                                                            "name": "blue",
-                                                            "displayString": "Blue"
-                                                        },
-                                                    }
-                                                },
-                                                "midColourState":{
-                                                    "type": "uiStateCommand",
-                                                    "name": "midColourState",
-                                                    "displayString": "Mid",
-                                                    "userOptions": {
-                                                        "green": {
-                                                            "type": "uiElement",
-                                                            "name": "green",
-                                                            "displayString": "Green"
-                                                        },
-                                                        "yellow": {
-                                                            "type": "uiElement",
-                                                            "name": "yellow",
-                                                            "displayString": "Yellow"
-                                                        },
-                                                        "red": {
-                                                            "type": "uiElement",
-                                                            "name": "red",
-                                                            "displayString": "Red"
-                                                        },
-                                                        "blue": {
-                                                            "type": "uiElement",
-                                                            "name": "blue",
-                                                            "displayString": "Blue"
-                                                        },
-                                                    }
-                                                },
-                                                "maxColourState":{
-                                                    "type": "uiStateCommand",
-                                                    "name": "maxColourState",
-                                                    "displayString": "Max",
-                                                    "userOptions": {
-                                                        "green": {
-                                                            "type": "uiElement",
-                                                            "name": "green",
-                                                            "displayString": "Green"
-                                                        },
-                                                        "yellow": {
-                                                            "type": "uiElement",
-                                                            "name": "yellow",
-                                                            "displayString": "Yellow"
-                                                        },
-                                                        "red": {
-                                                            "type": "uiElement",
-                                                            "name": "red",
-                                                            "displayString": "Red"
-                                                        },
-                                                        "blue": {
-                                                            "type": "uiElement",
-                                                            "name": "blue",
-                                                            "displayString": "Blue"
-                                                        },
-                                                    }
+                                    },
+                                    "sensor_range_colours": {
+                                        "type": "uiSubmodule",
+                                        "name": "sensor_ranges",
+                                        "displayString": "Sensor Range Colours",
+                                        "children": {
+                                            "minColourState":{
+                                                "type": "uiStateCommand",
+                                                "name": "minColourState",
+                                                "displayString": "Min",
+                                                "userOptions": {
+                                                    "green": {
+                                                        "type": "uiElement",
+                                                        "name": "green",
+                                                        "displayString": "Green"
+                                                    },
+                                                    "yellow": {
+                                                        "type": "uiElement",
+                                                        "name": "yellow",
+                                                        "displayString": "Yellow"
+                                                    },
+                                                    "red": {
+                                                        "type": "uiElement",
+                                                        "name": "red",
+                                                        "displayString": "Red"
+                                                    },
+                                                    "blue": {
+                                                        "type": "uiElement",
+                                                        "name": "blue",
+                                                        "displayString": "Blue"
+                                                    },
+                                                }
+                                            },
+                                            "midColourState":{
+                                                "type": "uiStateCommand",
+                                                "name": "midColourState",
+                                                "displayString": "Mid",
+                                                "userOptions": {
+                                                    "green": {
+                                                        "type": "uiElement",
+                                                        "name": "green",
+                                                        "displayString": "Green"
+                                                    },
+                                                    "yellow": {
+                                                        "type": "uiElement",
+                                                        "name": "yellow",
+                                                        "displayString": "Yellow"
+                                                    },
+                                                    "red": {
+                                                        "type": "uiElement",
+                                                        "name": "red",
+                                                        "displayString": "Red"
+                                                    },
+                                                    "blue": {
+                                                        "type": "uiElement",
+                                                        "name": "blue",
+                                                        "displayString": "Blue"
+                                                    },
+                                                }
+                                            },
+                                            "maxColourState":{
+                                                "type": "uiStateCommand",
+                                                "name": "maxColourState",
+                                                "displayString": "Max",
+                                                "userOptions": {
+                                                    "green": {
+                                                        "type": "uiElement",
+                                                        "name": "green",
+                                                        "displayString": "Green"
+                                                    },
+                                                    "yellow": {
+                                                        "type": "uiElement",
+                                                        "name": "yellow",
+                                                        "displayString": "Yellow"
+                                                    },
+                                                    "red": {
+                                                        "type": "uiElement",
+                                                        "name": "red",
+                                                        "displayString": "Red"
+                                                    },
+                                                    "blue": {
+                                                        "type": "uiElement",
+                                                        "name": "blue",
+                                                        "displayString": "Blue"
+                                                    },
                                                 }
                                             }
                                         }
