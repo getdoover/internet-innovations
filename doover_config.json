@@ -9,14 +9,14 @@
         ],
         "tasks" : [
             {
-                "name" : "on_ii_webhook_recv",
+                "name" : "on_internet_innovations_webhook_recv",
                 "processor_name" : "message_processor",
                 "task_config" : {
                     "message_type": "CONNECTOR_RECV"
                 },
                 "subscriptions" : [
                     {
-                        "channel_name" : "ii_webhook_recv",
+                        "channel_name" : "internet_innovations_webhook_recv",
                         "is_active" : true
                     }
                 ]
