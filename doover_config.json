@@ -22,7 +22,7 @@
                 },
                 "subscriptions" : [
                     {
-                        "channel_name" : "iin_oem_uplink_recv",
+                        "channel_name" : "ii_oem_uplink_recv",
                         "is_active" : true
                     }
                 ]
