@@ -143,37 +143,30 @@ class target:
                         "type" : "uiVariable",
                         "varType" : "float",
                         "name" : "batteryVoltage",
-                        "displayString" : "Battery Voltage (V)",
+                        "displayString" : "Battery (%)",
                         "decPrecision": 1,
                         "ranges": [
                             {
                                 "label" : "Low",
-                                "min" : 9,
-                                "max" : 11.5,
+                                "min" : 0,
+                                "max" : 30,
+                                "colour" : "yello",
+                                "showOnGraph" : True
+                            },
+                            {
+                                "label" : "Ok",
+                                "min" : 30,
+                                "max" : 60,
                                 "colour" : "yellow",
                                 "showOnGraph" : True
                             },
                             {
-                                # "label" : "Ok",
-                                "min" : 11.5,
-                                "max" : 13.0,
-                                "colour" : "blue",
-                                "showOnGraph" : True
-                            },
-                            {
-                                "label" : "Charging",
-                                "min" : 13.0,
-                                "max" : 14.2,
+                                "label" : "Full",
+                                "min" : 60,
+                                "max" : 100,
                                 "colour" : "green",
                                 "showOnGraph" : True
                             },
-                            {
-                                "label" : "Over Voltage",
-                                "min" : 14.2,
-                                "max" : 15.0,
-                                "colour" : "yellow",
-                                "showOnGraph" : True
-                            }
                         ]
                     },
                     "solarVoltage" : {
@@ -185,30 +178,23 @@ class target:
                         "ranges": [
                             {
                                 "label" : "Low",
-                                "min" : 3.0,
-                                "max" : 3.5,
+                                "min" : 0,
+                                "max" : 2,
                                 "colour" : "yellow",
                                 "showOnGraph" : True
                             },
                             {
                                 # "label" : "Ok",
-                                "min" : 3.5,
-                                "max" : 3.8,
+                                "min" : 2,
+                                "max" : 4,
                                 "colour" : "blue",
                                 "showOnGraph" : True
                             },
                             {
                                 "label" : "Good",
-                                "min" : 3.8,
-                                "max" : 4.2,
+                                "min" : 4,
+                                "max" : 9,
                                 "colour" : "green",
-                                "showOnGraph" : True
-                            },
-                            {
-                                "label" : "Over Voltage",
-                                "min" : 4.2,
-                                "max" : 4.5,
-                                "colour" : "yellow",
                                 "showOnGraph" : True
                             }
                         ]
@@ -366,8 +352,8 @@ class target:
                         "connectionType": "periodic",
                         # "connectionPeriod": 1800,
                         # "nextConnection": 1800
-                        "connectionPeriod": 600,
-                        "nextConnection": 600,
+                        "connectionPeriod": 5,
+                        "nextConnection": 900,
                     }
                 }
             }
@@ -556,16 +542,21 @@ class target:
                 data = f['AnalogueData']
 
                 if 'battv' in data:
-                    batt_voltage = data['battv'] / 1000
+                    batt_voltage = (int(data['battv']) / 1600) / 4.2
+                    if batt_voltage > 1:
+                        batt_voltage = 1
+                    if batt_voltage < 0:
+                        batt_voltage = 0
+                    batt_voltage = batt_voltage * 100
 
                 if 'solarv' in data:
-                    solar_voltage = data['solarv'] / 1000
+                    solar_voltage = int(data['solarv']) * 27 / 1000
 
-                if 'distance' in data:
-                    sensor_reading = data['distance']
+                if 'reading' in data:
+                    sensor_reading = int(data['reading'])
 
                 if 'rssi' in data:
-                    rssi = data['rssi']
+                    rssi = int(data['rssi'])
                 
                 if 'gateway' in data:
                     gateway = data['gateway']
