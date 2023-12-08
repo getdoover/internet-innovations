@@ -23,7 +23,7 @@ except: pass
 # sys.path.append(os.path.dirname(__file__))
 import pydoover as pd
 
-config_id = 'DM_SERIAL'
+config_id = 'II_SERIAL'
 msg_id_key = 'SerNo'
 
 class target:
@@ -90,7 +90,7 @@ class target:
                     self.add_to_log('Found agent ' + str(agent_key) + " with matching serial number " + str(serial_num))
 
                     destination_channel = self.cli.get_channel(
-                        channel_name="dm_oem_uplink_recv",
+                        channel_name="ii_oem_uplink_recv",
                         agent_id=agent_key
                     )
 
@@ -98,10 +98,10 @@ class target:
                         msg_str=json.dumps(msg_obj['payload'])
                     )
 
-                    self.add_to_log("Published to dm_oem_uplink_recv channel")
+                    self.add_to_log("Published to ii_oem_uplink_recv channel")
                     return
 
-        self.add_to_log("Did not find an agent with matching DM_SERIAL deployment config")
+        self.add_to_log(f"Did not find an agent with matching {config_id} deployment config")
 
 
     def create_doover_client(self):
