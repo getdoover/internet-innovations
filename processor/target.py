@@ -571,7 +571,7 @@ class target:
                     gateway = data['gateway']
 
                 if 'dateadded' in data:
-                    last_reading = int(data['last_reading'])
+                    last_reading = int(data['dateadded'])
                     last_reading = datetime.datetime.fromtimestamp(last_reading, datetime.timezone(datetime.timedelta(hours=10)))
                     last_reading = last_reading.strftime("%Y-%m-%d %I:%M %p")
 
