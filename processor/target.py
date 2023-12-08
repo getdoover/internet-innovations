@@ -86,8 +86,8 @@ class target:
         for ak, a in agents.items():
             deployment_config = a.get_deployment_config()
             self.add_to_log("agent is: " + str(a) )
-            self.add_to_log("deployment config is ",str(deployment_config), "type is ", type(deployment_config))
-            self.add_to_log("device_config_id_key is ",str(device_config_id_key), "type is ", type(device_config_id_key))
+            self.add_to_log("deployment config is " + str(deployment_config)+ "| type is: " +type(deployment_config))
+            self.add_to_log("device_config_id_key is "+ str(device_config_id_key)+"| type is: "+ type(device_config_id_key))
            
 
             if deployment_config is not None and device_config_id_key in deployment_config:
