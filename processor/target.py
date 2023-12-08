@@ -56,7 +56,7 @@ class target:
 
             ## Get the oem_uplink channel
             oem_uplink_channel = self.cli.get_channel(
-                channel_name="dm_oem_uplink_recv",
+                channel_name="ii_oem_uplink_recv",
                 agent_id=self.kwargs['agent_id']
             )
 
