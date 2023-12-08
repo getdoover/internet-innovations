@@ -210,6 +210,12 @@ class target:
                                 "name" : "sensorLastRead",
                                 "displayString" : "Reading taken at:",
                             },
+                            "rawBattVoltage": {
+                                "type": "uiVariable",
+                                "name": "rawBattVoltage",
+                                "displayString": "Battery (V)",
+                                "varType": "float"
+                            },
                             "gateway" : {
                                 "type" : "uiVariable",
                                 "varType" : "text",
@@ -532,6 +538,7 @@ class target:
             last_reading = None
             solar_voltage = None
             batt_voltage = None
+            raw_battery_voltage = None
             sensor_reading = None
 
             for f in fields:
@@ -542,7 +549,9 @@ class target:
                 data = f['AnalogueData']
 
                 if 'battv' in data:
-                    batt_voltage = (float(data['battv']) / 1600) / 4.2
+                    raw_battery_voltage = (float(data['battv']) / 1600) 
+                    batt_voltage=raw_battery_voltage / 4.2
+
                     if batt_voltage > 1:
                         batt_voltage = 1
                     if batt_voltage < 0:
@@ -612,6 +621,9 @@ class target:
                                         "lastRSSI": {
                                             "currentValue" : rssi,
                                         },
+                                         "rawBattVoltage": {
+                                            "currentValue" : raw_battery_voltage,
+                                        }
                                     },
                                 },
                             }
