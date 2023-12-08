@@ -112,7 +112,7 @@ class target:
                         "type" : "uiVariable",
                         "varType" : "float",
                         "name" : "sensorReading",
-                        "displayString" : "Temperature (C)",
+                        "displayString" : "Level (%)",
                         "decPrecision": 1,
                         "form": "radialGauge",
                         "ranges": [
@@ -210,6 +210,12 @@ class target:
                                 "name" : "sensorLastRead",
                                 "displayString" : "Reading taken at:",
                             },
+                            "rawSensorReading": {
+                                "type" : "uiVariable",
+                                "varType" : "float",
+                                "name" : "rawSensorReading",
+                                "displayString" : "Water Height from Sensor (m)",
+                            },
                             "rawBattVoltage": {
                                 "type": "uiVariable",
                                 "name": "rawBattVoltage",
@@ -233,6 +239,16 @@ class target:
                                 "name": "sensor_settings_submodule",
                                 "displayString": "Temperature Dial Settings",
                                 "children": {
+                                    "sensorHeightOffset": {
+                                        "type": "uiFloatParam",
+                                        "name": "sensorHeightOffset",
+                                        "displayString": "Sensor height offset (m)",
+                                    },
+                                     "tankDepth": {
+                                        "type": "uiFloatParam",
+                                        "name": "tankDepth",
+                                        "displayString": "Tank Depth(m)",
+                                    },
                                     "sensor_ranges": {
                                         "type": "uiSubmodule",
                                         "name": "sensor_ranges",
@@ -382,6 +398,18 @@ class target:
         ## Run any downlink processing code here
         cmds_obj = ui_cmds_channel.get_aggregate()
 
+        sensorHeightOffset = 2.5
+        try:
+            sensorHeightOffset = cmds_obj['cmds']['sensorHeightOffset']
+        except Exception as e:
+            self.add_to_log("Error getting sensorHeightOffset - " + str(e))
+
+        tankDepth = 2
+        try:
+            tankDepth = cmds_obj['cmds']['tankDepth']
+        except Exception as e:
+            self.add_to_log("Error getting tankDepth - " + str(e))
+
         minColor = "red"
         try: 
             minColor = cmds_obj['cmds']['minColourState']
@@ -465,6 +493,19 @@ class target:
 
         # process commands
         cmds_obj = ui_cmds_channel.get_aggregate()
+
+        sensorHeightOffset = 2.5
+        try:
+            sensorHeightOffset = cmds_obj['cmds']['sensorHeightOffset']
+        except Exception as e:
+            self.add_to_log("Error getting sensorHeightOffset - " + str(e))
+
+        tankDepth = 2
+        try:
+            tankDepth = cmds_obj['cmds']['tankDepth']
+        except Exception as e:
+            self.add_to_log("Error getting tankDepth - " + str(e))
+
 
         minColor = "red"
         try: 
@@ -563,6 +604,7 @@ class target:
 
                 if 'reading' in data:
                     sensor_reading = float(data['reading'])
+                    level = (sensorHeightOffset - sensor_reading) / tankDepth * 100
 
                 if 'rssi' in data:
                     rssi = float(data['rssi'])
@@ -582,7 +624,7 @@ class target:
                         "state" : {
                             "children" : {
                                 "sensorReading" : {
-                                    "currentValue" : sensor_reading,
+                                    "currentValue" : level,
                                     "ranges": [
                                         {
                                             "label" : "Low",
@@ -626,6 +668,9 @@ class target:
                                         },
                                          "rawBattVoltage": {
                                             "currentValue" : raw_battery_voltage,
+                                        },
+                                        "rawSensorReading":{
+                                            "currentValue" : sensor_reading,
                                         }
                                     },
                                 },
