@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, sys, time, json, traceback
+import os, sys, time, json, traceback, datetime
 
 
 ## This is the definition for a tiny lambda function
@@ -570,8 +570,11 @@ class target:
                 if 'gateway' in data:
                     gateway = data['gateway']
 
-                if 'last_reading' in data:
-                    last_reading = data['last_reading']
+                if 'dateadded' in data:
+                    last_reading = int(data['last_reading'])
+                    last_reading = datetime.datetime.fromtimestamp(last_reading, datetime.timezone(datetime.timedelta(hours=10)))
+                    last_reading = last_reading.strftime("%Y-%m-%d %I:%M %p")
+
 
 
                 ui_state_channel.publish(
